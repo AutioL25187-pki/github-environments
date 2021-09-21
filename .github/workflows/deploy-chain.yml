@@ -15,6 +15,18 @@ jobs:
       - name: Compile
         run: echo Compiling...
         
+  DeployFeature:
+    name: Deploy to (temporary) Feature Dev
+    if: github.event_name == 'pull_request'
+    needs: Build
+    runs-on: ubuntu-latest
+    environment:
+      name: feature development
+      url: http://feature-x.evoya.com
+    steps:
+      - name: Deploy
+        run: echo Deploying to temporary feature dev...
+        
   DeployDev:
     name: Deploy to Dev
     needs: Build
