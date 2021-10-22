@@ -1,3 +1,2 @@
 # github-environments
-Testing and learning how GitHub's environments work in GitHub Actions
-cxhange
+Testing and learning how GitHub's environments work in GitHub Actions.
