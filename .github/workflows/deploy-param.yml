@@ -1,0 +1,40 @@
+name: Deploy Param
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to be deployed"
+        required: true
+      environment:
+        description: "Environment to deploy"
+        required: true
+        type: choice
+        options:
+          - dev
+          - staging
+          - QA
+          - demo
+      environment_url:
+        description: "URL for the environment"
+        required: true
+        type: string
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Compile
+        run: echo Compiling...
+        
+  Deploy:
+    name: Deploy to X
+    needs: Build
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.event.inputs.environment }}
+      url: ${{ github.event.inputs.environment_url }}
+    steps:
+      - name: Deploy
+        run: echo Deploying version ${{ github.event.inputs.version }} to ${{ github.event.inputs.environment }} env...
