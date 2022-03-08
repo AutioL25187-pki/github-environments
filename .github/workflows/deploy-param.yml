@@ -29,12 +29,12 @@ jobs:
         run: echo Compiling...
         
   Deploy:
-    name: Deploy to X
+    name: Deploy to ${{ github.event.inputs.environment }}
     needs: Build
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.event.inputs.environment }}
-      url: ${{ github.event.inputs.environment_url }}
+      url: http://${{ github.event.inputs.environment_url }}
     steps:
       - name: Deploy
         run: echo Deploying version ${{ github.event.inputs.version }} to ${{ github.event.inputs.environment }} env...
